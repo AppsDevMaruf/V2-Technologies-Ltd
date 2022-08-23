@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class ResponseItem{
+public class MainResponseItem{
 
 	@SerializedName("question")
 	private String question;
@@ -24,24 +24,48 @@ public class ResponseItem{
 	@SerializedName("required")
 	private boolean required;
 
+	public void setQuestion(String question){
+		this.question = question;
+	}
+
 	public String getQuestion(){
 		return question;
+	}
+
+	public void setReferTo(int referTo){
+		this.referTo = referTo;
 	}
 
 	public int getReferTo(){
 		return referTo;
 	}
 
+	public void setOptions(List<OptionsItem> options){
+		this.options = options;
+	}
+
 	public List<OptionsItem> getOptions(){
 		return options;
+	}
+
+	public void setId(int id){
+		this.id = id;
 	}
 
 	public int getId(){
 		return id;
 	}
 
+	public void setType(String type){
+		this.type = type;
+	}
+
 	public String getType(){
 		return type;
+	}
+
+	public void setRequired(boolean required){
+		this.required = required;
 	}
 
 	public boolean isRequired(){
@@ -51,7 +75,7 @@ public class ResponseItem{
 	@Override
  	public String toString(){
 		return 
-			"ResponseItem{" + 
+			"MainResponseItem{" + 
 			"question = '" + question + '\'' + 
 			",referTo = '" + referTo + '\'' + 
 			",options = '" + options + '\'' + 

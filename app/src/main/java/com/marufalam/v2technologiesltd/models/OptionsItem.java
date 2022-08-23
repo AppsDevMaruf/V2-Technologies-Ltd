@@ -10,8 +10,16 @@ public class OptionsItem{
 	@SerializedName("value")
 	private String value;
 
+	public void setReferTo(int referTo){
+		this.referTo = referTo;
+	}
+
 	public int getReferTo(){
 		return referTo;
+	}
+
+	public void setValue(String value){
+		this.value = value;
 	}
 
 	public String getValue(){
