@@ -4,13 +4,13 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class MainResponseItem{
+public class SurveyResponse {
 
 	@SerializedName("question")
 	private String question;
 
 	@SerializedName("referTo")
-	private int referTo;
+	private String referTo;
 
 	@SerializedName("options")
 	private List<OptionsItem> options;
@@ -32,11 +32,11 @@ public class MainResponseItem{
 		return question;
 	}
 
-	public void setReferTo(int referTo){
+	public void setReferTo(String referTo){
 		this.referTo = referTo;
 	}
 
-	public int getReferTo(){
+	public String getReferTo(){
 		return referTo;
 	}
 
@@ -73,15 +73,14 @@ public class MainResponseItem{
 	}
 
 	@Override
- 	public String toString(){
-		return 
-			"MainResponseItem{" + 
-			"question = '" + question + '\'' + 
-			",referTo = '" + referTo + '\'' + 
-			",options = '" + options + '\'' + 
-			",id = '" + id + '\'' + 
-			",type = '" + type + '\'' + 
-			",required = '" + required + '\'' + 
-			"}";
-		}
+	public String toString() {
+		return "SurveyResponse{" +
+				"question='" + question + '\'' +
+				", referTo='" + referTo + '\'' +
+				", options=" + options +
+				", id=" + id +
+				", type='" + type + '\'' +
+				", required=" + required +
+				'}';
+	}
 }

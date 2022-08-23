@@ -4,15 +4,15 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.marufalam.v2technologiesltd.models.MainResponse;
+import com.marufalam.v2technologiesltd.models.SurveyResponse;
 
 public class SurveyViewModel extends ViewModel {
 
     private String TAG = SurveyViewModel.class.getSimpleName();
 
-    private final MutableLiveData<MainResponse> surveyLiveData = new MutableLiveData<>();
+    private final MutableLiveData<SurveyResponse> surveyLiveData = new MutableLiveData<>();
 
-    public LiveData<MainResponse> getSurveyLiveData() {
+    public LiveData<SurveyResponse> getSurveyLiveData() {
         return surveyLiveData;
     }
 

@@ -5,16 +5,16 @@ import com.google.gson.annotations.SerializedName;
 public class OptionsItem{
 
 	@SerializedName("referTo")
-	private int referTo;
+	private String referTo;
 
 	@SerializedName("value")
 	private String value;
 
-	public void setReferTo(int referTo){
+	public void setReferTo(String referTo){
 		this.referTo = referTo;
 	}
 
-	public int getReferTo(){
+	public String getReferTo(){
 		return referTo;
 	}
 
@@ -27,11 +27,10 @@ public class OptionsItem{
 	}
 
 	@Override
- 	public String toString(){
-		return 
-			"OptionsItem{" + 
-			"referTo = '" + referTo + '\'' + 
-			",value = '" + value + '\'' + 
-			"}";
-		}
+	public String toString() {
+		return "OptionsItem{" +
+				"referTo='" + referTo + '\'' +
+				", value='" + value + '\'' +
+				'}';
+	}
 }

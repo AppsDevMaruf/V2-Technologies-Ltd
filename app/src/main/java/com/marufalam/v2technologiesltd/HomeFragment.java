@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.marufalam.v2technologiesltd.databinding.FragmentHomeBinding;
-import com.marufalam.v2technologiesltd.models.MainResponse;
+import com.marufalam.v2technologiesltd.models.SurveyResponse;
 import com.marufalam.v2technologiesltd.networks.SurveyServices;
 import com.marufalam.v2technologiesltd.viewmodel.SurveyViewModel;
 
@@ -47,20 +47,20 @@ public class HomeFragment extends Fragment {
             Toast.makeText(requireContext(), ""+response.toString(), Toast.LENGTH_SHORT).show();
         });
         viewModel.loadData();*/
-        SurveyServices.getServices().getSurveyData("getSurvey").enqueue(new Callback<List<MainResponse>>() {
+        SurveyServices.getServices().getSurveyData("getSurvey").enqueue(new Callback<List<SurveyResponse>>() {
             @Override
-            public void onResponse(Call<List<MainResponse>> call, Response<List<MainResponse>> response) {
+            public void onResponse(Call<List<SurveyResponse>> call, Response<List<SurveyResponse>> response) {
                 if (response.code() == 200){
 
-                    Log.e(TAG, "OK data get"+response.body());
-                    binding.textView.setText(""+response.body().get(1).getMainResponse());
+                    Log.e(TAG, "OK data get"+response.body().toString()+"\n \n");
+                    binding.textView.setText(""+response.body().toString());
                     Toast.makeText(requireActivity(), ""+response, Toast.LENGTH_SHORT).show();
 
                 }
             }
 
             @Override
-            public void onFailure(Call<List<MainResponse>> call, Throwable t) {
+            public void onFailure(Call<List<SurveyResponse>> call, Throwable t) {
 
                     Log.e(TAG, "onFailure: "+t.getLocalizedMessage());
                     Log.e(TAG, "error"+t.getMessage());
