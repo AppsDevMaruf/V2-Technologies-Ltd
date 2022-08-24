@@ -5,6 +5,7 @@ import static android.content.ContentValues.TAG;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,6 +18,8 @@ import com.marufalam.v2technologiesltd.models.SurveyResponse;
 import com.marufalam.v2technologiesltd.networks.SurveyServices;
 import com.marufalam.v2technologiesltd.viewmodel.SurveyViewModel;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 import retrofit2.Call;
@@ -27,6 +30,7 @@ import retrofit2.Response;
 public class HomeFragment extends Fragment {
     private FragmentHomeBinding binding;
     private SurveyViewModel viewModel;
+    //String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
 
 
 
@@ -39,15 +43,15 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(inflater, container, false);
-        /*viewModel = new ViewModelProvider(requireActivity()).get(SurveyViewModel.class);
+       viewModel = new ViewModelProvider(requireActivity()).get(SurveyViewModel.class);
         Toast.makeText(requireContext(), "Thanks", Toast.LENGTH_SHORT).show();
         viewModel.getSurveyLiveData().observe(getViewLifecycleOwner(),response -> {
             Log.e("TAG", "onCreateView: "+response.toString());
             binding.textView.setText(response.toString());
             Toast.makeText(requireContext(), ""+response.toString(), Toast.LENGTH_SHORT).show();
         });
-        viewModel.loadData();*/
-        SurveyServices.getServices().getSurveyData("getSurvey").enqueue(new Callback<List<SurveyResponse>>() {
+
+       /* SurveyServices.getServices().getSurveyData(timeStamp,"getSurvey").enqueue(new Callback<List<SurveyResponse>>() {
             @Override
             public void onResponse(Call<List<SurveyResponse>> call, Response<List<SurveyResponse>> response) {
                 if (response.code() == 200){
@@ -65,9 +69,9 @@ public class HomeFragment extends Fragment {
                     Log.e(TAG, "onFailure: "+t.getLocalizedMessage());
                     Log.e(TAG, "error"+t.getMessage());
             }
-        });
+        });*/
 
-
+       viewModel.loadData();
         return binding.getRoot();
     }
 }

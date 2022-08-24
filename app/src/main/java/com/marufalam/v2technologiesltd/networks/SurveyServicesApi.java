@@ -7,11 +7,12 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.Url;
 
 public interface SurveyServicesApi {
     @GET
-    Call<List<SurveyResponse>> getSurveyData(@Url String url);
+    Call<List<SurveyResponse>> getSurveyData(@Header("timestamp") String timestamp, @Url String url);
 
 
 }
