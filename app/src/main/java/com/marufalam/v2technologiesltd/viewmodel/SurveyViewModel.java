@@ -6,13 +6,12 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.marufalam.v2technologiesltd.models.SurveyResponse;
+import com.marufalam.v2technologiesltd.models.Survey;
 import com.marufalam.v2technologiesltd.networks.SurveyServices;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -23,9 +22,9 @@ public class SurveyViewModel extends ViewModel {
     private String TAG = SurveyViewModel.class.getSimpleName();
     String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
 
-    private final MutableLiveData<List<SurveyResponse>> surveyLiveData = new MutableLiveData<>();
+    private final MutableLiveData<List<Survey>> surveyLiveData = new MutableLiveData<>();
 
-    public LiveData<List<SurveyResponse>> getSurveyLiveData() {
+    public LiveData<List<Survey>> getSurveyLiveData() {
         return surveyLiveData;
     }
 
@@ -36,9 +35,9 @@ public class SurveyViewModel extends ViewModel {
     private void loadSurveyData() {
         final String endUrl = "getSurvey";
 
-        SurveyServices.getServices().getSurveyData(timeStamp, "getSurvey").enqueue(new Callback<List<SurveyResponse>>() {
+        SurveyServices.getServices().getSurveyData(timeStamp, "getSurvey").enqueue(new Callback<List<Survey>>() {
             @Override
-            public void onResponse(Call<List<SurveyResponse>> call, Response<List<SurveyResponse>> response) {
+            public void onResponse(Call<List<Survey>> call, Response<List<Survey>> response) {
                 if (response.code() == 200) {
                     surveyLiveData.postValue(response.body());
                    /* for (int i = 0; i < Objects.requireNonNull(response.body()).size(); i++) {
@@ -57,7 +56,7 @@ public class SurveyViewModel extends ViewModel {
             }
 
             @Override
-            public void onFailure(Call<List<SurveyResponse>> call, Throwable t) {
+            public void onFailure(Call<List<Survey>> call, Throwable t) {
                 Log.e(TAG, "onFailure: " + t.getLocalizedMessage());
                 Log.e(TAG, "error" + t.getMessage());
             }

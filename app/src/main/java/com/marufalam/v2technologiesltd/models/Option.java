@@ -2,7 +2,7 @@ package com.marufalam.v2technologiesltd.models;
 
 import com.google.gson.annotations.SerializedName;
 
-public class OptionsItem{
+public class Option {
 
 	@SerializedName("referTo")
 	private String referTo;

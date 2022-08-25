@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class SurveyResponse {
+public class Survey {
 
 	@SerializedName("question")
 	private String question;
@@ -13,7 +13,7 @@ public class SurveyResponse {
 	private String referTo;
 
 	@SerializedName("options")
-	private List<OptionsItem> options;
+	private List<Option> options;
 
 	@SerializedName("id")
 	private int id;
@@ -40,11 +40,11 @@ public class SurveyResponse {
 		return referTo;
 	}
 
-	public void setOptions(List<OptionsItem> options){
+	public void setOptions(List<Option> options){
 		this.options = options;
 	}
 
-	public List<OptionsItem> getOptions(){
+	public List<Option> getOptions(){
 		return options;
 	}
 
@@ -68,7 +68,7 @@ public class SurveyResponse {
 		this.required = required;
 	}
 
-	public boolean isRequired(){
+	public boolean getRequired(){
 		return required;
 	}
 

@@ -1,7 +1,7 @@
 package com.marufalam.v2technologiesltd.networks;
 
 
-import com.marufalam.v2technologiesltd.models.SurveyResponse;
+import com.marufalam.v2technologiesltd.models.Survey;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ import retrofit2.http.Url;
 
 public interface SurveyServicesApi {
     @GET
-    Call<List<SurveyResponse>> getSurveyData(@Header("timestamp") String timestamp, @Url String url);
+    Call<List<Survey>> getSurveyData(@Header("timestamp") String timestamp, @Url String url);
 
 
 }
