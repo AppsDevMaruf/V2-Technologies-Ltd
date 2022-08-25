@@ -141,6 +141,8 @@
                 android:inputType="number"
                 android:visibility="gone" />
 
+
+
             <!--        camera-->
 
 
@@ -159,9 +161,10 @@
                     />
                 <ImageView
                     android:id="@+id/displayImg"
-                    android:visibility="gone"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="120dp"
+                    android:visibility="gone"
+                    android:src="@drawable/camera_icon"/>
 
 
             </LinearLayout>

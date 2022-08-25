@@ -38,6 +38,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class HomeFragment extends Fragment {
     private FragmentHomeBinding binding;
     private SurveyViewModel viewModel;
+    Uri uri;
     List<Survey> surveyList;
     int referTo = 0;
 
@@ -109,11 +110,12 @@ public class HomeFragment extends Fragment {
 
             case Type.camera:
                 Toast.makeText(requireContext(), "Welcome To Camera", Toast.LENGTH_SHORT).show();
-                ImagePicker.with(this)
+                camera(survey);
+                /*ImagePicker.with(this)
                         .crop()	    			//Crop image(Optional), Check Customization for more option
                         .compress(1024)			//Final image size will be less than 1 MB(Optional)
                         .maxResultSize(1080, 1080)	//Final image resolution will be less than 1080 x 1080(Optional)
-                        .start();
+                        .start();*/
 
 
 
@@ -125,20 +127,37 @@ public class HomeFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Uri uri = data.getData();
-        setAllAOptionDisable();
-        binding.loadingGif.setVisibility(View.GONE);
-        binding.displayImg.setVisibility(View.VISIBLE);
-        binding.displayImg.setImageURI(uri);
+        if (resultCode ==Activity.RESULT_OK){
+            Uri uri = data.getData();
+            setAllAOptionDisable();
+            binding.loadingGif.setVisibility(View.GONE);
+            binding.displayImg.setVisibility(View.VISIBLE);
+            binding.displayImg.setImageURI(uri);
+        }
+        else if (resultCode == ImagePicker.RESULT_ERROR) {
+            Toast.makeText(requireActivity(), ImagePicker.getError(data), Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(requireActivity(), "Task Cancelled", Toast.LENGTH_SHORT).show();
+        }
 
     }
+
 
     //camera
     private void camera(Survey survey) {
         setAllAOptionDisable();
         AtomicBoolean isRequired = new AtomicBoolean(false);
         binding.camera.setVisibility(View.VISIBLE);
+        binding.displayImg.setVisibility(View.VISIBLE);
         binding.question.setText(survey.getQuestion());
+        binding.displayImg.setOnClickListener(view -> {
+             ImagePicker.with(this)
+                        .crop()	    			//Crop image(Optional), Check Customization for more option
+                        .compress(1024)			//Final image size will be less than 1 MB(Optional)
+                        .maxResultSize(1080, 1080)	//Final image resolution will be less than 1080 x 1080(Optional)
+                        .start();
+
+        });
 
 
         if (survey.getOptions() == null || survey.getOptions().size() == 0) {
@@ -484,6 +503,7 @@ public class HomeFragment extends Fragment {
         binding.checkbox.setVisibility(View.GONE);
         binding.numberInput.setVisibility(View.GONE);
         binding.camera.setVisibility(View.GONE);
+        binding.loadingGif.setVisibility(View.GONE);
 
 
     }
