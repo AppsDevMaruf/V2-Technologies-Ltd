@@ -114,16 +114,7 @@ public class HomeFragment extends Fragment {
                 break;
 
             case Type.camera:
-                Toast.makeText(requireContext(), "Welcome To Camera", Toast.LENGTH_SHORT).show();
                 camera(survey);
-                /*ImagePicker.with(this)
-                        .crop()	    			//Crop image(Optional), Check Customization for more option
-                        .compress(1024)			//Final image size will be less than 1 MB(Optional)
-                        .maxResultSize(1080, 1080)	//Final image resolution will be less than 1080 x 1080(Optional)
-                        .start();*/
-
-
-
                 break;
         }
 
@@ -199,6 +190,7 @@ public class HomeFragment extends Fragment {
             Toast.makeText(requireActivity(), ""+data.getData(), Toast.LENGTH_SHORT).show();
             binding.camera.setVisibility(View.VISIBLE);
             binding.displayImg.setVisibility(View.VISIBLE);
+            binding.displayImg.getLayoutParams().height = ViewGroup.LayoutParams.MATCH_PARENT; //set image height
         }
         else if (resultCode == ImagePicker.RESULT_ERROR) {
             Toast.makeText(requireActivity(), ImagePicker.getError(data), Toast.LENGTH_SHORT).show();
