@@ -1,7 +1,10 @@
 package com.marufalam.v2technologiesltd;
 
+import static android.app.Activity.RESULT_OK;
+
 import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -14,6 +17,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -124,23 +129,7 @@ public class HomeFragment extends Fragment {
 
 
     }
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode ==Activity.RESULT_OK){
-            Uri uri = data.getData();
-            setAllAOptionDisable();
-            binding.loadingGif.setVisibility(View.GONE);
-            binding.displayImg.setVisibility(View.VISIBLE);
-            binding.displayImg.setImageURI(uri);
-        }
-        else if (resultCode == ImagePicker.RESULT_ERROR) {
-            Toast.makeText(requireActivity(), ImagePicker.getError(data), Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(requireActivity(), "Task Cancelled", Toast.LENGTH_SHORT).show();
-        }
 
-    }
 
 
     //camera
@@ -152,10 +141,12 @@ public class HomeFragment extends Fragment {
         binding.question.setText(survey.getQuestion());
         binding.displayImg.setOnClickListener(view -> {
              ImagePicker.with(this)
+                     .saveDir(requireActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES))
                         .crop()	    			//Crop image(Optional), Check Customization for more option
                         .compress(1024)			//Final image size will be less than 1 MB(Optional)
                         .maxResultSize(1080, 1080)	//Final image resolution will be less than 1080 x 1080(Optional)
                         .start();
+
 
         });
 
@@ -190,6 +181,30 @@ public class HomeFragment extends Fragment {
 
 
         });
+
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+
+        if (resultCode == RESULT_OK){
+            Uri uri = data.getData();
+            setAllAOptionDisable();
+            binding.loadingGif.setVisibility(View.GONE);
+
+            Log.e("TAG", "onActivityResult: "+uri );
+            binding.displayImg.setImageURI(uri);
+            Toast.makeText(requireActivity(), ""+data.getData(), Toast.LENGTH_SHORT).show();
+            binding.camera.setVisibility(View.VISIBLE);
+            binding.displayImg.setVisibility(View.VISIBLE);
+        }
+        else if (resultCode == ImagePicker.RESULT_ERROR) {
+            Toast.makeText(requireActivity(), ImagePicker.getError(data), Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(requireActivity(), "Task Cancelled", Toast.LENGTH_SHORT).show();
+        }
 
     }
 
